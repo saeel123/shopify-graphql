@@ -1,14 +1,16 @@
 import React from 'react';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider, Query} from 'react-apollo';
+import gql from 'graphql-tag';
 
-import { ApolloClient, InMemoryCache,  ApolloProvider, gql } from '@apollo/client';
-import Products from './components/Products'; 
+import Products from './components/Products';
+import CollapsibleTable from './components/CollapsibleTable';
+
 
 const client = new ApolloClient({
-  uri: 'https://goa-fish-market-test.myshopify.com/admin/api/2020-07/graphql.json',
-  cache: new InMemoryCache(),
+  uri: 'https://goa-fish-market-test.myshopify.com/api/graphql',
   headers: {
-    "Content-Type": "application/json",
-    "X-Shopify-Access-Token": "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"
+      'X-Shopify-Storefront-Access-Token': '0a9472669e95584e889c4fc63f252f7c'
   }
 });
 
@@ -27,6 +29,8 @@ function App() {
     <ApolloProvider client={client}>
       <div>
         <h1>Products</h1>
+        <Products/>
+        {/* <CollapsibleTable/> */}
       </div>
     </ApolloProvider>
   );
